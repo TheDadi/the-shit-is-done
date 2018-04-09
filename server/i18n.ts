@@ -28,6 +28,7 @@ const options: InitOptions = {
 
 const i18nInstance = i18next
 
+// @ts-ignore
 if (process.browser) {
   i18nInstance
     .use(XHR)

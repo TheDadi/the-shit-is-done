@@ -1,6 +1,7 @@
 import * as next from 'next'
 import * as express from 'express'
 import * as path from 'path'
+import * as compression from 'compression'
 import * as serveStatic from 'serve-static'
 import * as i18nextMiddleware from 'i18next-express-middleware'
 import * as Backend from 'i18next-node-fs-backend'
@@ -30,6 +31,9 @@ i18nInstance
       app.prepare()
         .then(() => {
           const server = express()
+
+          server.use(compression())
+          server.use('/sw.js', serveStatic(path.join(process.cwd(), './static/sw.js')));
 
           // enable middleware for i18next
           server.use(i18nextMiddleware.handle(i18nInstance))
